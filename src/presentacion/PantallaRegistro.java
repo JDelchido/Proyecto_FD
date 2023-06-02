@@ -1,5 +1,6 @@
 package presentacion;
 
+//import controlador.SistemaRegistro;
 import controlador.SistemaRegistro;
 import dominio.Usuario;
 import integracion.Repositorio;
@@ -35,12 +36,14 @@ public class PantallaRegistro extends JDialog{
         registrarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 RegistrarUsuario();
             }
         });
         logInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 PasarALogin();
             }
         });

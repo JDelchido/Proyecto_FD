@@ -71,4 +71,9 @@ public class PantallaPrincipal extends JDialog{
     public void PasarABuscarForoTema (Usuario u){ new PantallaBuscarForoTema(null, u);}
 
     public void PasarAEliminarCuenta(Usuario u){ new PantallaEliminarCuenta(null, u);}
+
+    public static void main(String[] args)
+    {
+        PantallaPrincipal myForm = new PantallaPrincipal(null,null);
+    }
 }

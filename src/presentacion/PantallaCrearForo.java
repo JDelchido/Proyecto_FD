@@ -1,45 +1,45 @@
 package presentacion;
 
 import controlador.SistemaCrearForo;
+import dominio.Foro;
 import dominio.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
+//import java.util.Objects;
 
 public class PantallaCrearForo extends JDialog{
     private JPanel crearForoPanel;
     private JTextField tFDescripcion;
     private JButton volverButton;
     private JButton crearButton;
-    private JComboBox comboBox1;
-    private DefaultComboBoxModel temaComboBoxModel = new DefaultComboBoxModel();
     private JLabel mensajeError;
     private JTextField tFNombre;
-
     SistemaCrearForo sistemaCrearForo = new SistemaCrearForo();
+    private JComboBox <String> comboForoTema;
+    private void llenarTemaComboBox(){
+        String [] temas = {"Opinion", "Anuncio","Asignatura"};
+        DefaultComboBoxModel <String> modelo = new DefaultComboBoxModel<>(temas);
+        comboForoTema.setModel(modelo);
+        comboForoTema.isEditable();
+    }
 
     public PantallaCrearForo(JFrame parent,Usuario u)
     {
         super(parent);
-        setTitle("Crear una nueva cuenta");
+        setTitle("Crear una nuevo foro");
         setContentPane(crearForoPanel);
         setMinimumSize(new Dimension(500, 474));
         setModal(true);
         setLocationRelativeTo(parent);
 
-        comboBox1.setModel(temaComboBoxModel);
-        temaComboBoxModel.addElement("Opinion");
-        temaComboBoxModel.addElement("Anuncio");
-        temaComboBoxModel.addElement("Asignatura");
-        temaComboBoxModel.addElement("Recomendaciones");
-        temaComboBoxModel.addElement("");
 
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 CrearForo(u);
             }
         });
@@ -54,27 +54,36 @@ public class PantallaCrearForo extends JDialog{
 
         setVisible(true);
     }
-
+    void PasarAPrincipal (Usuario usuario){
+        new PantallaPrincipal(null, usuario);
+    }
     private void CrearForo(Usuario u) {
         String nombre = tFNombre.getText();
         String descripcion = tFDescripcion.getText();
-        String tema = Objects.requireNonNull(comboBox1.getSelectedItem()).toString();
+        String tema = (String) comboForoTema.getSelectedItem();
 
-        if(nombre.isEmpty() || descripcion.isEmpty() || tema.isEmpty())
-        {
+        if (nombre.isEmpty() || descripcion.isEmpty() || tema.isEmpty()) {
             mensajeError.setForeground(new Color(255, 35, 0));
             mensajeError.setText("Alguno de los cuadros estan vacios");
-        }
-        else
-        {
-            boolean insertado = sistemaCrearForo.CrearForo(nombre, tema, descripcion, u.getUsuario());
-            if(!insertado)
-            {
+        } else {
+            boolean nombreAsignado = sistemaCrearForo.buscarNombreTemaForo(nombre,tema);
+
+            if (nombreAsignado == false) {
                 mensajeError.setForeground(new Color(255, 35, 0));
-                mensajeError.setText("No se ha podido crear el foro");
+                mensajeError.setText("El foro se creo exitosamente");
+                Foro f = new Foro(nombre, tema, descripcion);
+                sistemaCrearForo.crearForo(f);
+            } else {
+                if (nombreAsignado == true) {
+                    mensajeError.setForeground(new Color(255, 35, 0));
+                    mensajeError.setText("El nombre y tema asignado al foro ya fueron usados para crear otro foro, asigne otro nombre o cambie el tema");
+                }
             }
         }
     }
+    public static void main(String[] args)
+    {
+        PantallaCrearForo myFor = new PantallaCrearForo(null,null);
+    }
 
-    void PasarAPrincipal (Usuario usuario){ new PantallaPrincipal(null, usuario); }
 }

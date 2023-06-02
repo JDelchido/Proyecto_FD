@@ -1,15 +1,20 @@
+
 package controlador;
 
+import dominio.Foro;
+import integracion.Repositorio;
+
 public class SistemaCrearForo {
+    private Repositorio BaseDeDatos2 = new Repositorio();
 
-    public SistemaCrearForo(){}
+    public SistemaCrearForo() {
+    }
 
-    public boolean CrearForo(String nombre, String tema, String descripcion, String administrador)
-    {
-        boolean insertado = false;
+    public void crearForo(Foro f) {
+        this.BaseDeDatos2.crearForo(f);
+    }
 
-        //insertado = BaseDeDatos.insertar(nombre, tema, descripcion, administrador); //Se insertan los datos en la base de datos
-
-        return insertado;
+    public boolean buscarNombreTemaForo(String f, String t) {
+        return f.equals(this.BaseDeDatos2.buscarForoNombreTema(f, t));
     }
 }
