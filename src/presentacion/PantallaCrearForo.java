@@ -68,16 +68,13 @@ public class PantallaCrearForo extends JDialog{
         } else {
             boolean nombreAsignado = sistemaCrearForo.buscarNombreTemaForo(nombre,tema);
 
-            if (nombreAsignado == false) {
-                mensajeError.setForeground(new Color(255, 35, 0));
+            mensajeError.setForeground(new Color(255, 35, 0));
+            if (!nombreAsignado) {
                 mensajeError.setText("El foro se creo exitosamente");
                 Foro f = new Foro(nombre, tema, descripcion);
                 sistemaCrearForo.crearForo(f);
             } else {
-                if (nombreAsignado == true) {
-                    mensajeError.setForeground(new Color(255, 35, 0));
-                    mensajeError.setText("El nombre y tema asignado al foro ya fueron usados para crear otro foro, asigne otro nombre o cambie el tema");
-                }
+                mensajeError.setText("El nombre y tema asignado al foro ya fueron usados para crear otro foro, asigne otro nombre o cambie el tema");
             }
         }
     }
