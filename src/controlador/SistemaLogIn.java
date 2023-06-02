@@ -1,23 +1,16 @@
 package controlador;
 
+import ConexionBaseDeDatos.QuerysUsuario;
 import dominio.Usuario;
-import integracion.Repositorio;
 
 public class SistemaLogIn {
-
-    public SistemaLogIn(){
-        repositorio = new Repositorio();
-    }
-
-    private Repositorio repositorio;
-
-    public boolean VerificarDatos(String usuario, String contraseña){
+    public boolean VerificarDatos(String usuario, String contrasena){
         boolean verificado = false;
-        String nContraseña = new String();
+        String nContrasena;
 
-        nContraseña = repositorio.buscar(usuario); //Devuelve la contraseña que se encontro por el usuario
+        nContrasena = QuerysUsuario.ValidarContrasena(usuario); //Devuelve la contraseña que se encontro por el usuario
 
-        if(contraseña.equals(nContraseña)){
+        if(contrasena.equals(nContrasena)){
             verificado = true;
         }
 
@@ -26,6 +19,7 @@ public class SistemaLogIn {
 
     public Usuario obtenerUsuario(String usuario)
     {
-        return repositorio.obetenerUsuario(usuario);
+        return QuerysUsuario.obtenerUsuario(usuario);
     }
 }
+

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class PantallaPrincipal extends JDialog{
     private JButton crearForoButton;
     private JButton buscarForoNombreButton;
-    private JButton cerrarSesiónButton;
+    private JButton cerrarSesionButton;
     private JButton eliminarCuentaButton;
     private JPanel pantallaPrincipalPanel;
     private JButton modificarCuentaButton;
@@ -52,12 +52,28 @@ public class PantallaPrincipal extends JDialog{
             }
         });
 
+        modificarCuentaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                PasarAModificarCuenta(u);
+            }
+        });
+
 
         eliminarCuentaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 PasarAEliminarCuenta(u);
+            }
+        });
+
+        cerrarSesionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                PasarALogIn();
             }
         });
 
@@ -71,4 +87,8 @@ public class PantallaPrincipal extends JDialog{
     public void PasarABuscarForoTema (Usuario u){ new PantallaBuscarForoTema(null, u);}
 
     public void PasarAEliminarCuenta(Usuario u){ new PantallaEliminarCuenta(null, u);}
+
+    public void PasarAModificarCuenta(Usuario u){ new PantallaModificarCuenta(null,u);}
+
+    public void PasarALogIn(){new PantallaLogin(null);}
 }

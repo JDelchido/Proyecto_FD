@@ -1,5 +1,6 @@
 package presentacion;
 
+import Utilidades.RevisarTamano;
 import controlador.SistemaEliminarCuenta;
 import dominio.Usuario;
 
@@ -12,7 +13,7 @@ public class PantallaEliminarCuenta extends JDialog{
     private JPanel eliminarCuentaPanel;
     private JButton volverButton;
     private JButton eliminarCuentaButton;
-    private JPasswordField pFContraseña;
+    private JPasswordField pFContrasena;
     private JLabel mensajeError;
 
     SistemaEliminarCuenta sistemaEliminarCuenta = new SistemaEliminarCuenta();
@@ -36,6 +37,7 @@ public class PantallaEliminarCuenta extends JDialog{
         volverButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 PasarAPrincipal(u);
             }
         });
@@ -44,18 +46,25 @@ public class PantallaEliminarCuenta extends JDialog{
     }
 
     private void EliminarCuenta(Usuario u) {
-        String contraseña = String.valueOf(pFContraseña.getPassword());
+        String contrasena = String.valueOf(pFContrasena.getPassword());
 
-        if(contraseña.isEmpty())
+        RevisarTamano revisarTamano = new RevisarTamano();
+
+        if(revisarTamano.VerificarLongitud(contrasena,50) == false){
+            mensajeError.setForeground(new Color(255, 35, 0));
+            mensajeError.setText("El dato 'Contraseña' excede la longitud máxima permitida");
+        }
+
+        if(contrasena.isEmpty())
         {
             mensajeError.setForeground(new Color(255, 35, 0));
             mensajeError.setText("La contraseña no esta vacia");
         }
         else
         {
-            boolean correcta = sistemaEliminarCuenta.ConfirmarContraseña(u.getUsuario(), contraseña);
+            boolean correcta = sistemaEliminarCuenta.ConfirmarContrasena(u.getUsuario(), contrasena);
 
-            if(correcta == true) {
+            if(correcta) {
                 sistemaEliminarCuenta.EliminarUsuario(u.getUsuario());
                 dispose();
                 PasarALogIn();

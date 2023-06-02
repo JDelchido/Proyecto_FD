@@ -1,28 +1,24 @@
 package controlador;
 
 
-import integracion.Repositorio;
+import ConexionBaseDeDatos.QuerysUsuario;
 
 public class SistemaEliminarCuenta {
 
-    private Repositorio BasesDeDatos2;
-    public SistemaEliminarCuenta() {
-        BasesDeDatos2 = new Repositorio();
-    }
 
     public void EliminarUsuario(String usuario)
     {
-        BasesDeDatos2.eliminar(usuario);//Se elimia la fila del usuario insertado
+        QuerysUsuario.eliminar(usuario);//Se elimia la fila del usuario insertado
     }
 
-    public boolean ConfirmarContraseña(String usuario, String contraseña)
+    public boolean ConfirmarContrasena(String usuario, String contrasena)
     {
         boolean verificado = false;
-        String nContraseña = new String();
+        String nContrasena = new String();
 
-        nContraseña = BasesDeDatos2.buscar(usuario); //Devuelve la contraseña que se encontro por el usuario
+        nContrasena = QuerysUsuario.ValidarContrasena(usuario); //Devuelve la contraseña que se encontro por el usuario
 
-        if(contraseña.equals(nContraseña)){
+        if(contrasena.equals(nContrasena)){
             verificado = true;
         }
         return verificado;

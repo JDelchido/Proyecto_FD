@@ -81,7 +81,7 @@
           <text value="Contraseña"/>
         </properties>
       </component>
-      <component id="b8578" class="javax.swing.JPasswordField" binding="pFContraseña_1">
+      <component id="b8578" class="javax.swing.JPasswordField" binding="pFContrasena_1">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -107,7 +107,7 @@
         </constraints>
         <properties>
           <font name="Segoe Print" size="18" style="1"/>
-          <foreground color="-3289651"/>
+          <foreground color="-16777216"/>
           <text value="Registrar"/>
         </properties>
       </component>
@@ -117,7 +117,7 @@
         </constraints>
         <properties>
           <font name="Segoe Print" size="18" style="1"/>
-          <foreground color="-3289651"/>
+          <foreground color="-16777216"/>
           <text value="Atras"/>
         </properties>
       </component>
@@ -141,7 +141,7 @@
           <font name="Segoe Print" size="18" style="1"/>
         </properties>
       </component>
-      <component id="7c7c9" class="javax.swing.JPasswordField" binding="pFContraseña_2">
+      <component id="7c7c9" class="javax.swing.JPasswordField" binding="pFContrasena_2">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
