@@ -1,6 +1,5 @@
 package ConexionBaseDeDatos;
 
-import ConexionBaseDeDatos.ConexionBaseDatos;
 import dominio.Usuario;
 
 import java.sql.*;

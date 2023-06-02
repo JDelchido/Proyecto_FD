@@ -1,13 +1,4 @@
 package presentacion;
-
-import dominio.Usuario;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-package presentacion;
 import controlador.SistemaBuscarForo;
 import dominio.Foro;
 import dominio.Usuario;
@@ -23,12 +14,12 @@ import java.util.Vector;
 public class PantallaBuscarForoNombre extends JDialog {
     private JTextField tFConsultaForo;
     private JLabel label;
-    private JButton atrásButton;
+    private JButton atrasButton;
     private JButton buscarButton;
     private JPanel buscarForoPanel;
     private JLabel mensajeBusqueda;
     private JComboBox forosBox;
-    private DefaultComboBoxModel forosComboBoxModel = new DefaultComboBoxModel();
+    private final DefaultComboBoxModel forosComboBoxModel = new DefaultComboBoxModel();
     private JButton entrarButton;
     private JLabel mensajeEntrar;
 
@@ -62,7 +53,7 @@ public class PantallaBuscarForoNombre extends JDialog {
             }
         });
 
-        atrásButton.addActionListener(new ActionListener() {
+        atrasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -91,9 +82,8 @@ public class PantallaBuscarForoNombre extends JDialog {
 
             if(foros.size() > 0)
             {
-                for(int i=0; i<foros.size(); i++)
-                {
-                    forosComboBoxModel.addElement(foros.get(i).getNombre() + "-" + foros.get(i).getTema());
+                for (Foro value : foros) {
+                    forosComboBoxModel.addElement(value.getNombre() + "-" + value.getTema());
                 }
             }
             else
@@ -110,7 +100,7 @@ public class PantallaBuscarForoNombre extends JDialog {
 
         String s = Objects.requireNonNull(forosBox.getSelectedItem()).toString();
 
-        if(s.isEmpty() == false)
+        if(!s.isEmpty())
         {
             String[] p = s.split("-");
 
@@ -128,3 +118,4 @@ public class PantallaBuscarForoNombre extends JDialog {
         PantallaBuscarForoNombre myForm = new PantallaBuscarForoNombre(null,null);
     }
 }
+
